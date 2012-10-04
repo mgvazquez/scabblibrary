@@ -27,6 +27,9 @@
 ############## VARIABLES / CONSTANTES ##############
 	LIBRARY_VERSION="0.1"
 	LIBRARY_FILE="scabblibrary.lib"
+	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib/lsb}
+	LIBRARY=${LIBRARY:-$LIBRARY_PATH/$LIBRARY_FILE}
+
 	SCRIPT_FILE=$(basename $0) # Archivo del Script
 	SCRIPT_PATH=$(dirname $0) # Path del Script
 	SCRIPT_CFG_FILE="${SCRIPT_FILE%.*}.config" # Archivo de configuracion
@@ -51,10 +54,16 @@
 
 	# --- Logging ---
 	STDOUT_ENABLE=${STDOUT_ENABLE:-true} # Habilita (true) / Deshabilita (false) el StdOut del Log
+	DEBUG_ENABLE=${DEBUG_ENABLE:-false} # Habilita (true) / Deshabilita (false) el Debug del Log
 	LOG_ENABLE=${LOG_ENABLE:-true} # true=Log habilitado / false=Log deshabilitado
 	LOG_PATH=${LOG_PATH:-"/var/log"} # Path destino del Log
 	LOG_FILE=${LOG_FILE:-$DATE-$SCRIPT_TITLE-$HOST_NAME} # Nombre del Archivo de Log
 	LOG=${LOG:-"$LOG_PATH/$LOG_FILE.log"} # Destino final del log
+
+	# --- COMMAND OPTIONS ---
+	if ! $DEBUG_ENABLE; then
+		WGET_DEBUG=${WGET_DEBUG:-"-o /dev/null "}
+	fi
 ####################################################
 
 
@@ -62,7 +71,7 @@
 
 	# Funcion de Logging
 	log(){
-		# Uso <command> | log 7 
+		# Uso <command> | log
 		# Ej: echo "Esto es un texto de prueba" | log
 		# Ej: tar --directory=$1 --append --file=$PATH_TMP/$2 $3.war | log
 		while read data
@@ -74,6 +83,19 @@
 				echo -e "[$(date "+%Y.%m.%d") - $(date "+%H:%M:%S")] $data" >> $LOG; # Imprime en el archivo de Log
 			fi
 		done
+	}
+
+	# Funcion de Debug Logging
+	debug(){
+		# Uso <command> | debug 
+		# Ej: echo "Esto es un texto de prueba" | debug
+		# Ej: tar --directory=$1 --append --file=$PATH_TMP/$2 $3.war | debug
+		while read data
+		do
+			if $DEBUG_ENABLE; then
+				echo -e "$data" | log
+			fi
+		done		
 	}
 
 	# Obtener sub string
@@ -123,20 +145,20 @@
 	# Devuelve el estado de la coneccion
 	gotConnected(){
 		if $GOTCONNECTED; then
-			echo -e "- Ya se encuentra conectado"
+			echo -e "- Ya se encuentra conectado" | debug
 			return 0
 		else
 			if $CHKCONNECTION; then
-				echo -e "- La conexion ya se habia intentado comprobar"
+				echo -e "- La conexion ya se habia intentado comprobar" | debug
 				return 1
 			else
-				echo -e "- Chequeando conexion"
+				echo -e "- Chequeando conexion" | debug
 				local _gotConnected=$(/usr/bin/GET https://raw.github.com > /dev/null && echo ok)
 				if [[ $_gotConnected == "ok" ]]; then
-					echo -e "- Conexion realizada"
+					echo -e "- Conexion realizada" | debug
 					CHKCONNECTION=true && GOTCONNECTED=true && return 0
 				else
-					echo -e "- Conexion fallida"
+					echo -e "- Conexion fallida" | debug
 					CHKCONNECTION=true && GOTCONNECTED=false && return 1
 				fi			
 			fi
@@ -223,18 +245,25 @@
 	chkScriptIntegrity(){
 		# Uso: chkScriptIntegrity "<FILE_NAME>" "<TEMP_PATH>"
 		# Ej: chkScriptIntegrity "$LIBRARY_FILE" "/var/tmp"
-		if [[ $# -gt 0 ]]; then	local _fileScript=$1 && local _tmpPath=$2; fi
+		if [[ $# -gt 0 ]]; then
+			local _fileScript=$(basename $1)
+			local _fileScriptPath=$(dirname $1)
+			local _tmpPath=$2;
+		fi
 		local _fileScript=${_fileScript:-$SCRIPT_FILE}
+		local _fileScriptPath=${_fileScriptPath:-$SCRIPT_PATH}
 		local _tmpPath=${_tmpPath:-"/var/tmp"}
 		echo -e "\nChequeando integridad de: $_fileScript" | log
 		if [[ ! -f "$_tmpPath/${_fileScript%.*}.sha" ]]; then
 			echo -e "- No existe el archivo de firma '${_fileScript%.*}.sha', se intenta descargar." | log
 			if gotConnected; then
-				/usr/bin/wget -P $_tmpPath -o /dev/null https://raw.github.com/mgvazquez/${_fileScript%.*}/master/sha1/${_fileScript%.*}.sha && echo $?
-				if [ $? -gt 0 ]; then
+				/usr/bin/wget -P $_tmpPath $WGET_DEBUG https://raw.github.com/mgvazquez/${_fileScript%.*}/master/sha1/${_fileScript%.*}.sha
+				if [[ $? -gt 0 ]]; then
 					echo -e "- ERROR: Imposible descargar el archivo de firma" | log
 					echo -e "(Intente descargarlo manualmente desde http://github.com/mgvazquez/${_fileScript%.*}/)" | log
 					exit 1
+				else
+					echo -e "- Archivo de firma descargado satisfactoriamente" | log
 				fi
 			else
 				echo -e "- ERROR: Imposible descargar el archivo de firma" | log
@@ -242,13 +271,18 @@
 				exit 1
 			fi
 		fi
-		local _path=$(pwd)
-		cd $SCRIPT_PATH && /usr/bin/sha1sum -c $_tmpPath/${_fileScript%.*}.sha > /dev/null 2>&1
-		if [[ $? -gt 0 ]]; then
-			echo -e "- Falla de integridad" | log && exit 1
-		else
-			cd $_path && echo -e "- Integridad comprobada" | log && return 0
-		fi
+
+
+
+
+
+		# cd $_fileScriptPath && /usr/bin/sha1sum -c $_tmpPath/${_fileScript%.*}.sha > /dev/null 2>&1
+		# echo $?
+		# if [[ "$?" != "0" ]]; then
+		# 	echo -e "- Falla de integridad" | log && exit 1
+		# else
+		# 	cd $_path && echo -e "- Integridad comprobada" | log && return 0
+		# fi
 	}
 
 	# Chequea la version del Script
@@ -305,6 +339,7 @@
 
 ####################### MAIN #######################
 	clear
-	chkScriptIntegrity "$LIBRARY_FILE";
+	chkScriptIntegrity "$LIBRARY";
+	chkScriptIntegrity "$LIBRARY";
 	#chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
 ####################################################
