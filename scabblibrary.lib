@@ -25,7 +25,7 @@
 # 
 
 ############## VARIABLES / CONSTANTES ##############
-	LIBRARY_VERSION="1.0"
+	LIBRARY_VERSION="0.1"
 	LIBRARY_FILE="scabblibrary.lib"
 	SCRIPT_FILE=$(basename $0) # Archivo del Script
 	SCRIPT_PATH=$(dirname $0) # Path del Script
@@ -33,11 +33,18 @@
 	DATE=`date "+%Y.%m.%d"`
 	HOST_NAME=$(hostname | awk -F '.' '{print $1}') # Nombre del Host
 
-	# --- Repositorios de Chequeo ---
-	#CHKSUMS_REPO="https://raw.github.com/mgvazquez/${SCRIPT_FILE%.*}/master/sha1/${SCRIPT_FILE%.*}.sha" # Chequeo genérico de Script (chksum)
-	#CHKVERS_REPO="https://raw.github.com/mgvazquez/${SCRIPT_FILE%.*}/master/$SCRIPT_FILE" # Chequeo genérico de Script (Version)
-	#CHKSUML_REPO="https://raw.github.com/mgvazquez/scabblibrary/master/sha1/scabblibrary.sha" # Chequeo de Libreria (chksum)
-	#CHKVERL_REPO="https://raw.github.com/mgvazquez/scabblibrary/master/scabblibrary.lib" # Chequeo de Libreria (Version)
+	# --- Character Colors ---
+	# Uso: echo -e "${FONT_FG[1]}ROJO${FONT_TYPE[0]}" / El -e habilita el escape de caracteres
+	ESC_CHAR=${ESC_CHAR:-"\033"} # Si los colores fallan, reemplazar el '\033' por '\E' o '\e'
+	#            Normal(0)     Negrita(1)    Underline(2)     Blink(3)
+	FONT_TP=("$ESC_CHAR[0m" "$ESC_CHAR[1m" "$ESC_CHAR[4m" "$ESC_CHAR[5m");
+	#           Negro(0)         Rojo(1)        Verde(2)       Amarillo(3)       Azul(4)       Purpura(5)       Cyan(6)         Blanco(7)
+	FONT_FG=("$ESC_CHAR[30m" "$ESC_CHAR[31m" "$ESC_CHAR[32m" "$ESC_CHAR[33m" "$ESC_CHAR[34m" "$ESC_CHAR[35m" "$ESC_CHAR[36m" "$ESC_CHAR[37m"); #Letra
+	FONT_BG=("$ESC_CHAR[40m" "$ESC_CHAR[41m" "$ESC_CHAR[42m" "$ESC_CHAR[43m" "$ESC_CHAR[44m" "$ESC_CHAR[45m" "$ESC_CHAR[46m" "$ESC_CHAR[47m"); #Fondo
+
+	# --- Conectividad ---
+	CHKCONNECTION=${CHKCONNECTION:-false} # Devuelve si se comprobo la coneccion
+	GOTCONNECTED=${GOTCONNECTED:-false} # Devuelve el estado actual de la coneccion
 
 	SCRIPT_TITLE=${SCRIPT_TITLE:-"Template"} # Titulo del Script
 	TEMP_PATH=${TEMP_PATH:-"/tmp"} # Path para archivos temporales
@@ -113,6 +120,29 @@
 		esac
 	}
 
+	# Devuelve el estado de la coneccion
+	gotConnected(){
+		if $GOTCONNECTED; then
+			echo -e "- Ya se encuentra conectado"
+			return 0
+		else
+			if $CHKCONNECTION; then
+				echo -e "- La conexion ya se habia intentado comprobar"
+				return 1
+			else
+				echo -e "- Chequeando conexion"
+				local _gotConnected=$(/usr/bin/GET https://raw.github.com > /dev/null && echo ok)
+				if [[ $_gotConnected == "ok" ]]; then
+					echo -e "- Conexion realizada"
+					CHKCONNECTION=true && GOTCONNECTED=true && return 0
+				else
+					echo -e "- Conexion fallida"
+					CHKCONNECTION=true && GOTCONNECTED=false && return 1
+				fi			
+			fi
+		fi
+	}
+
 	# Busca y reemplaza un string en un archivo
 	remplaceString(){
 		# Uso / remplaceString "<PATRON>" "<STRING>" "<ARCHIVO>"
@@ -161,8 +191,120 @@
 		done
 	}
 
+	# Dibuja una liena de caracteres en una fila especifica
+	linexy(){
+		# Uso / linexy "<CARACTER>" "<X>" "<Y>"
+		# Ej: linexy "=" "0" "0"
+		local _columnas=$(tput cols) # Obtiene la cantidad de columnas del terminal
+		if [ $2 == null ]; then echo 1; fi
+		if [ $3 == mull ]; then echo 2; fi
+		/usr/bin/tput cup $3 $2
+		printf "%*s" $_columnas | tr " " "$1" # Reemplaza los espacios por lo que se ponga en $1
+	}
+
+	# Header Banner
+	headerBanner(){
+		# Uso / headerBanner "<TITULO>" "<PARAMETRO?>" / Parametro es opcional 'clear'
+		# Ej: headerBanner "Esto es un titulo" "clear"
+		# Resultado:
+		# ==============================================
+		# >>>           Esto es un titulo           <<<
+		# ==============================================
+		if [ "$2" == "clear" ]; then clear; fi # Limpia la pantalla
+		local _columnas=$(tput cols) # Obtiene la cantidad de columnas del terminal
+		linexy "=" "0" "0"
+		printf "%-*s%*s%*s\n" "3" ">>>" "$(((($_columnas+${#1})/2)-3))" "$1" "$(($_columnas-(($_columnas+${#1})/2)))" "<<<"
+		linexy "=" "0" "2"
+		echo -e "\n"
+	}
+
+	# Cheque la integridad del Script
+	# BUG: FALLA DURANTE LA EJECUCIÓN SI EL SCRIPT SE ENCUENTRA CRONEADO
+	chkScriptIntegrity(){
+		# Uso: chkScriptIntegrity "<FILE_NAME>" "<TEMP_PATH>"
+		# Ej: chkScriptIntegrity "$LIBRARY_FILE" "/var/tmp"
+		if [[ $# -gt 0 ]]; then	local _fileScript=$1 && local _tmpPath=$2; fi
+		local _fileScript=${_fileScript:-$SCRIPT_FILE}
+		local _tmpPath=${_tmpPath:-"/var/tmp"}
+		echo -e "\nChequeando integridad de: $_fileScript" | log
+		if [[ ! -f "$_tmpPath/${_fileScript%.*}.sha" ]]; then
+			echo -e "- No existe el archivo de firma '${_fileScript%.*}.sha', se intenta descargar." | log
+			if gotConnected; then
+				/usr/bin/wget -P $_tmpPath -o /dev/null https://raw.github.com/mgvazquez/${_fileScript%.*}/master/sha1/${_fileScript%.*}.sha && echo $?
+				if [ $? -gt 0 ]; then
+					echo -e "- ERROR: Imposible descargar el archivo de firma" | log
+					echo -e "(Intente descargarlo manualmente desde http://github.com/mgvazquez/${_fileScript%.*}/)" | log
+					exit 1
+				fi
+			else
+				echo -e "- ERROR: Imposible descargar el archivo de firma" | log
+				echo -e "(Intente descargarlo manualmente desde http://github.com/mgvazquez/${_fileScript%.*}/)" | log
+				exit 1
+			fi
+		fi
+		local _path=$(pwd)
+		cd $SCRIPT_PATH && /usr/bin/sha1sum -c $_tmpPath/${_fileScript%.*}.sha > /dev/null 2>&1
+		if [[ $? -gt 0 ]]; then
+			echo -e "- Falla de integridad" | log && exit 1
+		else
+			cd $_path && echo -e "- Integridad comprobada" | log && return 0
+		fi
+	}
+
+	# Chequea la version del Script
+	chkScriptVersion(){
+		# Uso: chkScriptVersion "<FILE_NAME>" "<FILE_VERSION>"
+		# Ej: chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION"
+		# Nota: Debe estar seteada la variable <VERSION>
+		if [[ $# -gt 0 ]]; then local _fileScript=$1; local _localVersion=$2; fi
+		local _fileScript=${_fileScript:-$SCRIPT_FILE}
+		echo -e "\nChequeando version de: $_fileScript" | log
+		if ! gotConnected; then
+			echo "- Error de conexion, imposible conectar con el repositorio remoto" | log && return 0
+		fi
+		local _remoteVersion=$(GET https://raw.github.com/mgvazquez/${_fileScript%.*}/master/$_fileScript | grep VERSION | awk -F '=' '{print $NF}' | sed 's/"//g' | head -n 1)
+		echo -e "- Version Remota: $_remoteVersion" | log
+		local _localVersion=${_localVersion:-$VERSION}
+		echo -e "- Version Local: $_localVersion" | log
+		if [[ $_localVersion == $_remoteVersion ]]; then
+			echo -e "- Version de '$_fileScript' actualizada" | log
+			return 0
+		fi
+		local IFS=.
+		local _localVersionArray=($_localVersion)
+		local _remoteVersionArray=($_remoteVersion)
+		if [ ${#_localVersionArray[*]} -ge ${#_remoteVersionArray[*]} ]; then
+			local _forLoop=${#_localVersionArray[*]}
+		else
+			local _forLoop=${#_remoteVersionArray[*]}
+		fi
+		for ((i=0; i<$_forLoop; i++)); do
+			if [[ -z ${_localVersionArray[i]} ]]; then
+				local _localVersionArray[i]=0
+			fi
+			if [[ -z ${_remoteVersionArray[i]} ]]; then
+				local _remoteVersionArray[i]=0
+			fi			        
+			if [[ ${_localVersionArray[i]} -gt ${_remoteVersionArray[i]} ]]; then
+				unset local IFS
+				echo -e "- Version local de '$_fileScript' inconsistente" | log
+				echo -e "(La version local es superior a la que se encuentra en el repositorio)" | log
+				return 0
+			fi  
+			if [[ ${_localVersionArray[i]} -lt ${_remoteVersionArray[i]} ]]; then
+				unset local IFS
+				echo -e "- Nueva versión de ${_fileScript%.*}: Actual (v$_localVersion) --> Nueva (v$_remoteVersion)" | log
+				echo -e "(Puede descargarla desde http://github.com/mgvazquez/${_fileScript%.*})" | log
+				return 0
+			fi
+		done
+	}
+
 ####################################################
 
 
 ####################### MAIN #######################
+	clear
+	chkScriptIntegrity "$LIBRARY_FILE";
+	#chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
 ####################################################
