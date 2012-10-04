@@ -1,0 +1,169 @@
+#
+# 	Function Library (c)2012 - Version 1.0
+#
+#	This program is free software: you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation, either version 3 of the License, or
+#	(at your option) any later version.
+#	
+#	This program is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+#	NO ALTERAR EL SCRIPT, DE LO CONTRARIO EL MISMO DEJARA DE FUNCIONAR
+#
+#		 Autor: Garcia Vazquez, Manuel Andres
+#		Correo: mvazquez@me.com
+#		   Web: www.scabb-island.com.ar
+#		gitHub: https://github.com/mgvazquez/scabblibrary
+#		Issues: https://github.com/mgvazquez/scabblibrary/issues
+#
+#		   Uso: <USO>
+#
+#		  Nota: <NOTA>
+# 
+
+############## VARIABLES / CONSTANTES ##############
+	LIBRARY_VERSION="1.0" # Versionado de la Libreria
+	LIBRARY_FILE="scabblibrary.lib"
+	SCRIPT_FILE=$(basename $0) # Archivo del Script
+	SCRIPT_PATH=$(dirname $0) # Path del Script
+	SCRIPT_CFG_FILE="${SCRIPT_FILE%.*}.config" # Archivo de configuracion
+	DATE=`date "+%Y.%m.%d"`
+	HOST_NAME=$(hostname | awk -F '.' '{print $1}') # Nombre del Host
+
+	# --- Repositorios de Chequeo ---
+	#CHKSUMS_REPO="https://raw.github.com/mgvazquez/${SCRIPT_FILE%.*}/master/sha1/${SCRIPT_FILE%.*}.sha" # Chequeo genérico de Script (chksum)
+	#CHKVERS_REPO="https://raw.github.com/mgvazquez/${SCRIPT_FILE%.*}/master/$SCRIPT_FILE" # Chequeo genérico de Script (Version)
+	#CHKSUML_REPO="https://raw.github.com/mgvazquez/scabblibrary/master/sha1/scabblibrary.sha" # Chequeo de Libreria (chksum)
+	#CHKVERL_REPO="https://raw.github.com/mgvazquez/scabblibrary/master/scabblibrary.lib" # Chequeo de Libreria (Version)
+
+	SCRIPT_TITLE=${SCRIPT_TITLE:-"Template"} # Titulo del Script
+	TEMP_PATH=${TEMP_PATH:-"/tmp"} # Path para archivos temporales
+
+	# --- Logging ---
+	STDOUT_ENABLE=${STDOUT_ENABLE:-true} # Habilita (true) / Deshabilita (false) el StdOut del Log
+	LOG_ENABLE=${LOG_ENABLE:-true} # true=Log habilitado / false=Log deshabilitado
+	LOG_PATH=${LOG_PATH:-"/var/log"} # Path destino del Log
+	LOG_FILE=${LOG_FILE:-$DATE-$SCRIPT_TITLE-$HOST_NAME} # Nombre del Archivo de Log
+	LOG=${LOG:-"$LOG_PATH/$LOG_FILE.log"} # Destino final del log
+####################################################
+
+
+#################### FUNCIONES #####################
+
+	# Funcion de Logging
+	log(){
+		# Uso <command> | log 7 
+		# Ej: echo "Esto es un texto de prueba" | log
+		# Ej: tar --directory=$1 --append --file=$PATH_TMP/$2 $3.war | log
+		while read data
+		do
+			if $STDOUT_ENABLE; then
+				echo -e "$data"; # Imprime en Pantalla
+			fi
+			if $LOG_ENABLE; then
+				echo -e "[$(date "+%Y.%m.%d") - $(date "+%H:%M:%S")] $data" >> $LOG; # Imprime en el archivo de Log
+			fi
+		done
+	}
+
+	# Obtener sub string
+	getSubstring(){
+		# Uso getSubstring "<string>" "<from_char>" "char_count"
+		# <from_char> comienza desde 0 (cero)
+		# Ej: getSubstring "WEBP250" "3" "1" --> Devuelve "P"
+		echo ${1:$2:$3};
+	}
+
+	# Convirte un String de Minúscula a Mayúscula
+	toUpper(){
+		echo $1 | tr  "[:lower:]" "[:upper:]"
+	}
+
+	# Convirte un String de Mayúscula a Minúscula
+	toLower(){
+		echo $1 | tr  "[:upper:]" "[:lower:]"
+	}
+
+	# Chequea similitud de archivos
+	chkSum(){
+		# Uso / chkSum "<Archivo1>" "<Archivo2>"
+		# Ej: chkSum "hola_mundo.xml" "hola_mundo.xml"
+		local _file1=$(/usr/bin/sha1sum $1 | awk -F ' ' '{print $1}')
+		local _file2=$(/usr/bin/sha1sum $2 | awk -F ' ' '{print $1}')
+		if [[ "$_file1" == "$_file2" ]]; then
+			return 1
+		else
+			return 0
+		fi
+	}
+
+	# Devuelve el entorno en el que se encuentra
+	getEnvironment(){
+		case ${HOST_NAME:3:1} in
+			[a-A]) echo "deva";;
+			[b-B]) echo "devb";;
+			[c-C]) echo "devc";;
+			[d-D]) echo "devd";;
+			[t-T]) echo "devt";;
+			[q-Q]) echo "qa";;
+			[p-P]) echo "pr";;
+		esac
+	}
+
+	# Busca y reemplaza un string en un archivo
+	remplaceString(){
+		# Uso / remplaceString "<PATRON>" "<STRING>" "<ARCHIVO>"
+		# Ej: remplaceString "Hola" "Chau" "test.cfg"
+		sed -i "s/$1/$2/g" "$3"	
+	}
+
+	# Hace una pregunta y guarda la respuesta
+	doQuestionAndReadAnswer(){
+		# Uso / doQuestionAndReadAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>" "<PRELOADER_TEXT> opcional"
+		# Ej: doQuestionAndReadAnswer "Cual es su nombre? " "NOMBRE" "Manuel"
+		read -e -p "$2" -i "$3" "$1"
+	}
+
+	# Rota los archivos
+	# Configurar para que el indicador de rotacion sea un caracter antes que la extension / Ej: <sarasa>.0.log
+	rotateFile(){
+		# Uso / rotateFile "<ARCHIVO>" "<PATH_DESTINO>" "<CANT_BKP>"
+		# Ej: rotateFile "<ARCHIVO>" "<PATH_DESTINO>" "<CANT_BKP>"
+		if [[ -f $2/$1 ]]; then
+			local _maxCounter=$(($3-1))
+			for i in `/usr/bin/find $2 -type f -name "$1*" | sort -r | awk -F '.' '{ if ($NF+0 == $NF) print}'`
+			do
+				local _fileCounter=`echo $i | awk -F '.' '{ if ($NF+0 == $NF) print $NF}'`
+				if [[ $_fileCounter -ge $_maxCounter ]]; then
+					/bin/rm -f $i
+				else
+					/bin/mv $i $2/$1.$(($_fileCounter+1))
+				fi
+			done
+			/bin/mv $2/$1 $2/$1.0
+		fi
+	}
+
+	# Hace una simple plegunta y retorna true-Si, false-No
+	doQuestionAndReadSimpleAnswer(){
+		# Uso / doQuestionAndReadSimpleAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>"
+		# Ej: ddoQuestionAndReadSimpleAnswer "DEPLOY_FRONT" "Desea deployaer FrontEnd.war"
+		echo -ne "$2? (S/N) "
+		while read -n 1 rta; do
+			if [[ $rta = [SsNn] ]]; then
+				[[ $rta = [Ss] ]] && eval ${1}=true && echo -e "\r"
+				[[ $rta = [Nn] ]] && eval ${1}=false && echo -e "\r"
+				break
+			fi
+		done
+	}
+
+####################################################
+
+
+####################### MAIN #######################
+
+####################################################
