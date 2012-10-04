@@ -116,6 +116,20 @@
 		echo $1 | tr  "[:upper:]" "[:lower:]"
 	}
 
+	# Busca y reemplaza un string en un archivo
+	remplaceString(){
+		# Uso / remplaceString "<PATRON>" "<STRING>" "<ARCHIVO>"
+		# Ej: remplaceString "Hola" "Chau" "test.cfg"
+		sed -i "s/$1/$2/g" "$3"	
+	}
+
+	# Hace una pregunta y guarda la respuesta
+	doQuestionAndReadAnswer(){
+		# Uso / doQuestionAndReadAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>" "<PRELOADER_TEXT> opcional"
+		# Ej: doQuestionAndReadAnswer "Cual es su nombre? " "NOMBRE" "Manuel"
+		read -e -p "$2" -i "$3" "$1"
+	}
+
 	# Chequea similitud de archivos
 	chkSum(){
 		# Uso / chkSum "<Archivo1>" "<Archivo2>"
@@ -144,6 +158,7 @@
 
 	# Devuelve el estado de la coneccion
 	gotConnected(){
+		echo -e "- Chequeando conexion" | debug
 		if $GOTCONNECTED; then
 			echo -e "- Ya se encuentra conectado" | debug
 			return 0
@@ -152,7 +167,6 @@
 				echo -e "- La conexion ya se habia intentado comprobar" | debug
 				return 1
 			else
-				echo -e "- Chequeando conexion" | debug
 				local _gotConnected=$(/usr/bin/GET https://raw.github.com > /dev/null && echo ok)
 				if [[ $_gotConnected == "ok" ]]; then
 					echo -e "- Conexion realizada" | debug
@@ -163,20 +177,6 @@
 				fi			
 			fi
 		fi
-	}
-
-	# Busca y reemplaza un string en un archivo
-	remplaceString(){
-		# Uso / remplaceString "<PATRON>" "<STRING>" "<ARCHIVO>"
-		# Ej: remplaceString "Hola" "Chau" "test.cfg"
-		sed -i "s/$1/$2/g" "$3"	
-	}
-
-	# Hace una pregunta y guarda la respuesta
-	doQuestionAndReadAnswer(){
-		# Uso / doQuestionAndReadAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>" "<PRELOADER_TEXT> opcional"
-		# Ej: doQuestionAndReadAnswer "Cual es su nombre? " "NOMBRE" "Manuel"
-		read -e -p "$2" -i "$3" "$1"
 	}
 
 	# Rota los archivos
@@ -241,7 +241,6 @@
 	}
 
 	# Cheque la integridad del Script
-	# BUG: FALLA DURANTE LA EJECUCIÓN SI EL SCRIPT SE ENCUENTRA CRONEADO
 	chkScriptIntegrity(){
 		# Uso: chkScriptIntegrity "<FILE_NAME>" "<TEMP_PATH>"
 		# Ej: chkScriptIntegrity "$LIBRARY_FILE" "/var/tmp"
@@ -271,18 +270,15 @@
 				exit 1
 			fi
 		fi
-
-
-
-
-
-		# cd $_fileScriptPath && /usr/bin/sha1sum -c $_tmpPath/${_fileScript%.*}.sha > /dev/null 2>&1
-		# echo $?
-		# if [[ "$?" != "0" ]]; then
-		# 	echo -e "- Falla de integridad" | log && exit 1
-		# else
-		# 	cd $_path && echo -e "- Integridad comprobada" | log && return 0
-		# fi
+		local _file1=$(/bin/cat $_tmpPath/${_fileScript%.*}.sha | awk -F ' ' '{print $1}')
+		echo -e "- Checksum del '${_fileScript%.*}.sha': $_file1" | debug
+		local _file2=$(/usr/bin/sha1sum $_fileScriptPath/$_fileScript | awk -F ' ' '{print $1}')
+		echo -e "- Checksum del '$_fileScript': $_file2" | debug
+		if [[ "$_file1" == "$_file2" ]]; then
+			echo -e "- Integridad comprobada" | log && return 0
+		 else
+		 	echo -e "- Falla de integridad" | log && exit 1
+		fi
 	}
 
 	# Chequea la version del Script
@@ -297,9 +293,9 @@
 			echo "- Error de conexion, imposible conectar con el repositorio remoto" | log && return 0
 		fi
 		local _remoteVersion=$(GET https://raw.github.com/mgvazquez/${_fileScript%.*}/master/$_fileScript | grep VERSION | awk -F '=' '{print $NF}' | sed 's/"//g' | head -n 1)
-		echo -e "- Version Remota: $_remoteVersion" | log
+		echo -e "- Version Remota: $_remoteVersion" | debug
 		local _localVersion=${_localVersion:-$VERSION}
-		echo -e "- Version Local: $_localVersion" | log
+		echo -e "- Version Local: $_localVersion" | debug
 		if [[ $_localVersion == $_remoteVersion ]]; then
 			echo -e "- Version de '$_fileScript' actualizada" | log
 			return 0
@@ -340,6 +336,5 @@
 ####################### MAIN #######################
 	clear
 	chkScriptIntegrity "$LIBRARY";
-	chkScriptIntegrity "$LIBRARY";
-	#chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
+	chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
 ####################################################
