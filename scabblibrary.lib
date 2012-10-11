@@ -374,5 +374,5 @@
 	clear
 	chkScriptIntegrity "$LIBRARY";
 	chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
-	echo "Habilitar 'chkScriptIntegrity' y 'chkScriptVersion' en $LIBRARY_FILE"
+	#echo "Habilitar 'chkScriptIntegrity' y 'chkScriptVersion' en $LIBRARY_FILE"
 ####################################################
