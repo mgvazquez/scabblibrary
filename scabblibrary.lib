@@ -405,5 +405,4 @@
 	chkScriptIntegrity "$LIBRARY";
 	chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
 	echo -e "\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" | log
-	echo "Habilitar 'chkScriptIntegrity' y 'chkScriptVersion' en $LIBRARY_FILE"
 ####################################################
