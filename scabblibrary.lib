@@ -1,5 +1,5 @@
 #
-# 	Function Library (c)2012 - Version 1.0
+# 	Function Library (c)2012 - Version 1.1
 #
 #	This program is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 # 
 
 ############## VARIABLES / CONSTANTES ##############
-	LIBRARY_VERSION="1.0"
+	LIBRARY_VERSION="1.1"
 	LIBRARY_FILE="scabblibrary.lib"
 	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib/lsb}
 	LIBRARY=${LIBRARY:-$LIBRARY_PATH/$LIBRARY_FILE}
@@ -40,7 +40,6 @@
 	# Uso: echo -e "${FONT_FG[1]}ROJO${FONT_TYPE[0]}" / El -e habilita el escape de caracteres
 	ESC_CHAR=${ESC_CHAR:-"\033"} # Si los colores fallan, reemplazar el '\033' por '\E' o '\e'
 	#            Normal(0)     Negrita(1)    Underline(2)     Blink(3)
-	
 	FONT_TP=("$ESC_CHAR[0m" "$ESC_CHAR[1m" "$ESC_CHAR[4m" "$ESC_CHAR[5m");
 	#           Negro(0)         Rojo(1)        Verde(2)       Amarillo(3)       Azul(4)       Purpura(5)       Cyan(6)         Blanco(7)
 	FONT_FG=("$ESC_CHAR[30m" "$ESC_CHAR[31m" "$ESC_CHAR[32m" "$ESC_CHAR[33m" "$ESC_CHAR[34m" "$ESC_CHAR[35m" "$ESC_CHAR[36m" "$ESC_CHAR[37m"); #Letra
@@ -53,6 +52,9 @@
 	SCRIPT_TITLE=${SCRIPT_TITLE:-"Template"} # Titulo del Script
 	TEMP_PATH=${TEMP_PATH:-"/tmp"} # Path para archivos temporales
 
+	# --- Notificaciones ---
+	SEND_MAIL_NOTIFICATION=${SEND_MAIL_NOTIFICATION:-true}
+
 	# --- Logging ---
 	STDOUT_ENABLE=${STDOUT_ENABLE:-true} # Habilita (true) / Deshabilita (false) el StdOut del Log
 	DEBUG_ENABLE=${DEBUG_ENABLE:-true} # Habilita (true) / Deshabilita (false) el Debug del Log
@@ -60,7 +62,6 @@
 	LOG_PATH=${LOG_PATH:-"/var/log"} # Path destino del Log
 	LOG_FILE=${LOG_FILE:-$DATE-$SCRIPT_TITLE-$HOST_NAME} # Nombre del Archivo de Log
 	LOG=${LOG:-"$LOG_PATH/$LOG_FILE.log"} # Destino final del log
-
 
 	# --- WGET OPTIONS ---
 	WGET_TRIES=${WGET_TRIES:-3}
@@ -166,15 +167,15 @@
 	gotConnected(){
 		echo -e "- Chequeando conexion" | debug
 		if $GOTCONNECTED; then
-			echo -e " -> Ya se encuentra conectado" | debug && return 0
+			echo -e " - Ya se encuentra conectado" | debug && return 0
 		else
 			if $CHKCONNECTION; then
-				echo -e " -> Conexion fallida" | debug && return 1
+				echo -e " - Conexion fallida" | debug && return 1
 			else
 				if $(/usr/bin/GET https://raw.github.com > /dev/null); then
-					echo -e " -> Conexion realizada" | debug && CHKCONNECTION=true && GOTCONNECTED=true && return 0
+					echo -e " - Conexion realizada" | debug && CHKCONNECTION=true && GOTCONNECTED=true && return 0
 				else
-					echo -e " -> Conexion fallida" | debug && CHKCONNECTION=true && GOTCONNECTED=false && return 1
+					echo -e " - Conexion fallida" | debug && CHKCONNECTION=true && GOTCONNECTED=false && return 1
 				fi			
 			fi
 		fi
@@ -185,6 +186,7 @@
 	rotateFile(){
 		# Uso / rotateFile "<ARCHIVO>" "<PATH_DESTINO>" "<CANT_BKP>"
 		# Ej: rotateFile "<ARCHIVO>" "<PATH_DESTINO>" "<CANT_BKP>"
+		echo -e "\nIntentando rotar $1" | debug
 		if [[ -f $2/$1 ]]; then
 			local _maxCounter=$(($3-1))
 			for i in `/usr/bin/find $2 -type f -name "$1*" | sort -r | awk -F '.' '{ if ($NF+0 == $NF) print}'`
@@ -197,6 +199,8 @@
 				fi
 			done
 			/bin/mv $2/$1 $2/$1.0
+		else
+			echo -e "- El archivo solicitado no existe" | debug
 		fi
 	}
 
@@ -253,16 +257,21 @@
 	chkPath(){
 		# Uso / chkPath "<path>"
 		# Ej: chkPath "/mnt/releases"
-		echo -e "\nVerificando directorio ($1)" | debug
+		echo -e "\nVerificando el directorio: $1" | debug
 		if [[ -d $1 ]]; then
-			echo -e "- $1 existe" | debug
+			echo -e "- Existe" | debug
 			if [[ -w $1 ]]; then
-				echo -e "- $1 tiene permisos de escritura" | debug && return 0
+				echo -e "- Tiene permisos de escritura" | debug
+				if [[ -w $1 ]]; then
+					echo -e "- Tiene permisos de lectura" | debug && return 0
+				else
+					echo -e "- No tiene permisos de lectura" | log && return 3
+				fi
 			else
-				echo -e "- $1 no tiene permisos de escritura" | log && return 2
+				echo -e "- No tiene permisos de escritura" | log && return 2
 			fi
 		else
-			echo -e "- $1 no existe" | log && return 1
+			echo -e "- No existe" | log && return 1
 		fi
 	}
 
@@ -307,15 +316,36 @@
 		fi
 	}
 
+	# Chequea que sea posible conectarse via ssh a un equipo con un usuario especifico
+	chkSsh(){
+		# Uso: chkSsh "<HOST>" "<user>"
+		# Ej: chkSsh "WEBP69" "root"
+		echo -e "\nChequeando conectividad via ssh con $1 ($2)" | debug
+		/usr/bin/ssh -q -o "ConnectTimeout 5" $2@$1 exit
+		if [[ $? -eq 0 ]]; then
+			echo -e "- Conecxion realizada" | debug && return 0;
+		else
+			echo -e "- Conecxion fallida" | debug && return 1;
+		fi
+	}
+
 	# Envia mail
 	sendMail(){
 		# Uso: sendMail "<DESTINO>" "<ASUNTO>" "<CUERPO>" "<FROM>" / campo <FROM> es opcional
 		# Ej: sendMail "mvazquez@me.com" "Esto es SendMail" "foo faaa" "sendmail@localhost.com"
 		# NOTA: El comando mail debe estar instalado y configurado.
-		if [[ -z $4 ]]; then
-			local _mailOptions="-- -r \"$4\""
+		if $SEND_MAIL_NOTIFICATION; then
+			echo -e "\nEnviando notificaciones de correo..." | log
+			if [[ -z "$1" ]]; then echo -e "- ERROR: No se especifico un destinarario" | log; return 1; fi
+			local _from=${_from:-$HOST_NAME@vdc.dridco.com}
+			if [[ -n $4 ]]; then local _from=$4; fi
+			local _fromName=$(toUpper "$(echo "$_from" | awk -F '@' '{print $1}')")
+			echo -e "- Desde: $_fromName ($_from)" | debug
+			echo -e "- Para: $1" | debug
+			echo -e "- Asunto: $2" | debug
+			echo -e "- Cuerpo: $3" | debug
+			echo -e "Subject: $2\n\n$3" | /usr/sbin/sendmail -F $_fromName -f $_from -r $_from  $1 2>&1 | debug
 		fi
-		echo -e "$3" | mail -s "$2" $1 $_mailOptions 2>&1 | debug
 	}
 
 	# Chequea la version del Script
@@ -374,5 +404,6 @@
 	clear
 	chkScriptIntegrity "$LIBRARY";
 	chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
-	#echo "Habilitar 'chkScriptIntegrity' y 'chkScriptVersion' en $LIBRARY_FILE"
+	echo -e "\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" | log
+	echo "Habilitar 'chkScriptIntegrity' y 'chkScriptVersion' en $LIBRARY_FILE"
 ####################################################
