@@ -21,7 +21,7 @@
 #
 #		   Uso: <USO>
 #
-#		  Nota: <NOTA>
+#		  Nota: <NOTA> 1
 # 
 
 ############## VARIABLES / CONSTANTES ##############
@@ -165,6 +165,8 @@
 
 	# Devuelve el estado de la coneccion
 	gotConnected(){
+		# CHKCONNECTION=${CHKCONNECTION:-false} # Devuelve si se comprobo la conexion
+		# GOTCONNECTED=${GOTCONNECTED:-false} # Devuelve el estado actual de la conexion
 		echo -e "- Chequeando conexion" | debug
 		if $GOTCONNECTED; then
 			echo -e " - Ya se encuentra conectado" | debug && return 0
@@ -333,6 +335,7 @@
 	sendMail(){
 		# Uso: sendMail "<DESTINO>" "<ASUNTO>" "<CUERPO>" "<FROM>" / campo <FROM> es opcional
 		# Ej: sendMail "mvazquez@me.com" "Esto es SendMail" "foo faaa" "sendmail@localhost.com"
+		# $SEND_MAIL_NOTIFICATION -> Habilita (true) / Deshabilita (false) las notificaciones de correo
 		# NOTA: El comando mail debe estar instalado y configurado.
 		if $SEND_MAIL_NOTIFICATION; then
 			echo -e "\nEnviando notificaciones de correo..." | log
