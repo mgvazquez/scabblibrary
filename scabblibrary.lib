@@ -159,7 +159,7 @@
 		# Ej: chkProcess "chrome"
 		# Nota: Devuelve '0' si existe, '1' si no existe
 		echo -e "- Chequeando existencia de proceso: $1" | debug
-		local _processCount=$(/bin/ps ax | grep -v grep | grep $1 | wc -l)
+		local _processCount=$(/bin/ps ax | grep -v grep | grep -v $SCRIPT_FILE | grep $1 | wc -l)
 		echo -e "Cantidad de procesos corriendo: $_processCount" | debug
 		if [[ $_processCount -eq 0 ]]; then
 			echo -e "- El proceso $1 no existe" | debug && return 1
