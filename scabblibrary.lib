@@ -362,7 +362,7 @@
 		if ! gotConnected; then
 			echo "- Error de conexion, imposible conectar con el repositorio remoto" | log && return 0
 		fi
-		local _remoteVersion=$(GET https://raw.github.com/mgvazquez/${_fileScript%.*}/master/$_fileScript | grep SCRIPT_VERSION | awk -F '=' '{print $NF}' | sed 's/"//g' | head -n 1)
+		local _remoteVersion=$(GET https://raw.github.com/mgvazquez/${_fileScript%.*}/master/$_fileScript | grep "SCRIPT_VERSION" | awk -F '=' '{print $NF}' | sed 's/"//g' | head -n 1)
 		echo -e "- Version Remota: $_remoteVersion" | debug
 		local _localVersion=${_localVersion:-$SCRIPT_VERSION}
 		echo -e "- Version Local: $_localVersion" | debug
