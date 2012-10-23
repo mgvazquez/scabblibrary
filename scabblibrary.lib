@@ -162,9 +162,9 @@
 		local _processCount=$(/bin/ps ax | grep -v grep | grep -v $SCRIPT_FILE | grep $1 | wc -l)
 		echo -e "- Cantidad de procesos corriendo: $_processCount" | debug
 		if [[ $_processCount -eq 0 ]]; then
-			echo -e "- El proceso $1 no existe" | debug && return 1
+			echo -e "- El proceso '$1' no existe" | debug && return 1
 		else
-			echo -e "- El proceso $1 existe" | debug && return 0
+			echo -e "- El proceso '$1' existe" | debug && return 0
 
 		fi	
 	}
