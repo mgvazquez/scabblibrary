@@ -139,6 +139,20 @@
 		read -e -p "$2" -i "$3" "$1"
 	}
 
+	# Hace una simple plegunta y retorna true-Si, false-No
+	doQuestionAndReadSimpleAnswer(){
+		# Uso / doQuestionAndReadSimpleAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>"
+		# Ej: ddoQuestionAndReadSimpleAnswer "DEPLOY_FRONT" "Desea deployaer FrontEnd.war"
+		echo -ne "$2? (S/N) "
+		while read -n 1 rta; do
+			if [[ $rta = [SsNn] ]]; then
+				[[ $rta = [Ss] ]] && eval ${1}=true && echo -e "\r"
+				[[ $rta = [Nn] ]] && eval ${1}=false && echo -e "\r"
+				break
+			fi
+		done
+	}
+
 	# Chequea similitud de archivos
 	chkSum(){
 		# Uso / chkSum "<Archivo1>" "<Archivo2>"
@@ -231,20 +245,6 @@
 		# Ej: getHour "M"
 		local _hour=$(/bin/date | awk -F ' ' '{print $4}' | awk -F ':' '{print $1}')
 		return $_hour
-	}
-
-	# Hace una simple plegunta y retorna true-Si, false-No
-	doQuestionAndReadSimpleAnswer(){
-		# Uso / doQuestionAndReadSimpleAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>"
-		# Ej: ddoQuestionAndReadSimpleAnswer "DEPLOY_FRONT" "Desea deployaer FrontEnd.war"
-		echo -ne "$2? (S/N) "
-		while read -n 1 rta; do
-			if [[ $rta = [SsNn] ]]; then
-				[[ $rta = [Ss] ]] && eval ${1}=true && echo -e "\r"
-				[[ $rta = [Nn] ]] && eval ${1}=false && echo -e "\r"
-				break
-			fi
-		done
 	}
 
 	# Dibuja una liena de caracteres en una fila especifica
