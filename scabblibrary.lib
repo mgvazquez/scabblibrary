@@ -375,7 +375,7 @@
 		# Uso: chkScriptVersion "<FILE_NAME>" "<FILE_VERSION>"
 		# Ej: chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION"
 		# Nota: Debe estar seteada la variable <VERSION>
-		if ! $VERSION_CHECK; then return 1;	fi
+		if ! $VERSION_CHECK; then return 0;	fi
 		if [[ $# -gt 0 ]]; then local _fileScript=$1; local _localVersion=$2; fi
 		local _fileScript=${_fileScript:-$SCRIPT_FILE}
 		echo -e "\nChequeando version de: $_fileScript" | log
