@@ -1,5 +1,5 @@
 #
-# 	Function Library (c)2012 - Version 1.1
+# 	Function Library (c)2012 - Version 1.2
 #
 #	This program is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 # 
 
 ############## VARIABLES / CONSTANTES ##############
-	LIBRARY_VERSION="1.1"
+	LIBRARY_VERSION="1.2"
 	LIBRARY_FILE="scabblibrary.lib"
 	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib/lsb}
 	LIBRARY=${LIBRARY:-$LIBRARY_PATH/$LIBRARY_FILE}
@@ -125,17 +125,11 @@
 		echo $1 | tr  "[:upper:]" "[:lower:]"
 	}
 
-	# Busca y reemplaza un string en un archivo
-	remplaceString(){
-		# Uso / remplaceString "<PATRON>" "<STRING>" "<ARCHIVO>"
-		# Ej: remplaceString "Hola" "Chau" "test.cfg"
-		sed -i "s/$1/$2/g" "$3"	
-	}
-
 	# Hace una pregunta y guarda la respuesta
 	doQuestionAndReadAnswer(){
 		# Uso / doQuestionAndReadAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>" "<PRELOADER_TEXT> opcional"
 		# Ej: doQuestionAndReadAnswer "Cual es su nombre? " "NOMBRE" "Manuel"
+
 		read -e -p "$2" -i "$3" "$1"
 	}
 
@@ -164,6 +158,21 @@
 			echo -e "- Los archivos son iguales" | debug && return 1
 		else
 			echo -e "- Los archivos son distintos" | debug && return 0
+		fi
+	}
+
+	# Busca y reemplaza un string en un archivo
+	remplaceString(){
+		# Uso / remplaceString "<PATRON>" "<STRING>" "<ARCHIVO>"
+		# Ej: remplaceString "Hola" "Chau" "test.cfg"
+		echo -e "\nRenplazando '$2' en el archivo $3" | debug
+		local _beforeSed=$(/usr/bin/sha1sum $3 | awk -F ' ' '{print $1}')
+		sed -i "s/$1/$2/g" "$3"
+		local _afterSed=$(/usr/bin/sha1sum $3 | awk -F ' ' '{print $1}')
+		if [[ "$_beforeSed" == "$_afterSed" ]]; then
+			echo -e "- No hubo matcheos" | debug && return 1
+		else
+			echo -e "- Se reemplazo '$1' por '$2' en el archivo '$3'" | debug && return 0
 		fi
 	}
 
