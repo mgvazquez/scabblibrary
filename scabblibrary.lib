@@ -129,7 +129,6 @@
 	doQuestionAndReadAnswer(){
 		# Uso / doQuestionAndReadAnswer "<VARIABLE_DESTINO>" "<PREGUNTA>" "<PRELOADER_TEXT> opcional"
 		# Ej: doQuestionAndReadAnswer "Cual es su nombre? " "NOMBRE" "Manuel"
-
 		read -e -p "$2" -i "$3" "$1"
 	}
 
