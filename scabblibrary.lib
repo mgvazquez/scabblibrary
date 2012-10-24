@@ -165,7 +165,7 @@
 	remplaceString(){
 		# Uso / remplaceString "<PATRON>" "<STRING>" "<ARCHIVO>"
 		# Ej: remplaceString "Hola" "Chau" "test.cfg"
-		echo -e "\nRenplazando '$2' en el archivo $3" | debug
+		echo -e "Renplazando '$2' en el archivo $3" | debug
 		local _beforeSed=$(/usr/bin/sha1sum $3 | awk -F ' ' '{print $1}')
 		sed -i "s/$1/$2/g" "$3"
 		local _afterSed=$(/usr/bin/sha1sum $3 | awk -F ' ' '{print $1}')
