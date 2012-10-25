@@ -95,6 +95,7 @@
 	}
 
 	# Funcion de Debug Logging
+	# Dependencia: log();
 	debug(){
 		# Uso <command> | debug 
 		# Ej: echo "Esto es un texto de prueba" | debug
