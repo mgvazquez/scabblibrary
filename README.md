@@ -2,7 +2,7 @@
 ===================
 
 *Scabblibrary*, es una pequeña libreria de funciones escritas en bash que nos facilita diversas tareas a la hora de escribir nuestros scripts.
-El archivo `template_script.tar.gz` contiene un template de script bash basado en *Scabblibrary*, junto con su correspondiente archivo de configuracion el cual se carga automaticamente el invocar el script (el archivo .config, debe tener el mismo nombre que el archivo del script)
+El archivo `template_script.tar.gz` contiene un template de script bash basado en *Scabblibrary*, junto con su correspondiente archivo de configuracion el cual se carga automaticamente el invocar el script (el archivo .config, debe tener el mismo nombre que el archivo del script). 
 
 ## Funciones
 - chkPath();
@@ -29,6 +29,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 ## Variables
 #### Generales
 - LIBRARY_VERSION (string)
+		Contiene la version actual de la Libreria
 - LIBRARY_FILE (string)
 - LIBRARY_PATH (string)
 - LIBRARY (string)
@@ -52,6 +53,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 #### Notificaciones (Mail)
 - SEND_MAIL_NOTIFICATION (boolean)
+	Al setear los valores true/false en esta variable, se habilita o deshabilita la funion sendMail();
 
 #### Logging
 - STDOUT_ENABLE (boolean)
