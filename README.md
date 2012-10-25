@@ -28,11 +28,10 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 ## Variables
 #### Generales
-- *LIBRARY_VERSION (string)*<dd> Contiene la version actual de la Libreria </dd><br/>
-- *LIBRARY_FILE (string)*<dd>Texto de Prueba</dd><br/>
-- *LIBRARY_PATH (string)*<dd>Texto de Prueba</dd><br/>
-- *LIBRARY (string)*<dd>Texto de Prueba</dd><br/>
-- *SCRIPT_FILE (string)*<dd>Texto de Prueba</dd><br/>
+- *LIBRARY_VERSION (string)*<dd>Contiene la version actual de la Libreria</dd><br/>
+- *LIBRARY_FILE (string)*<dd>Contiene el nombre del archivo de la libreria, 'scabblibrary.lib'</dd><br/>
+- *LIBRARY_PATH (string)*<dd>Path en donde vive la libreria. Por defecto es `/usr/lib`<br/>Puede setearse desde el archivo de configuracion del script</dd><br/>
+- *SCRIPT_FILE (string)*<dd>Nombre del Script que importa la Librería</dd><br/>
 - *SCRIPT_PATH (string)*<dd>Texto de Prueba</dd><br/>
 - *SCRIPT_CFG_FILE (string)*<dd>Texto de Prueba</dd><br/>
 - *SCRIPT_TITLE (string)*<dd>Texto de Prueba</dd><br/>
@@ -67,3 +66,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 - *WGET_TIMEOUT (int)*<dd>Texto de Prueba</dd><br/>
 - *WGET_OPTIONS (string)*<dd>Texto de Prueba</dd><br/>
 - *WGET_DEBUG (sting)*<dd>Texto de Prueba</dd><br/>
+
+<hr/>
+
+sasa

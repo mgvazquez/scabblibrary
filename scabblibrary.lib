@@ -27,7 +27,7 @@
 ############## VARIABLES / CONSTANTES ##############
 	LIBRARY_VERSION="1.2"
 	LIBRARY_FILE="scabblibrary.lib"
-	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib/lsb}
+	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib}
 	LIBRARY=${LIBRARY:-$LIBRARY_PATH/$LIBRARY_FILE}
 
 	SCRIPT_FILE=$(basename $0) # Archivo del Script
@@ -50,8 +50,6 @@
 	# --- Conectividad ---
 	CHKCONNECTION=${CHKCONNECTION:-false} # Devuelve si se comprobo la conexion
 	GOTCONNECTED=${GOTCONNECTED:-false} # Devuelve el estado actual de la conexion
-
-
 
 	# --- Notificaciones ---
 	SEND_MAIL_NOTIFICATION=${SEND_MAIL_NOTIFICATION:-true}
