@@ -1,6 +1,8 @@
-ScabbLibrary
-============
-This is a sample markdown file to help you write Markdown quickly :)
+ScabbLibrary (v1.2)
+===================
+
+Scabblibrary, es una pequeña libreria de funciones escritas en bash que nos facilita diversas tareas a la hora de escribir nuestros scripts.
+El archivo `template_script.tar.gz` contiene un template de script bash, junto con su correspondiente archivo de configuracion el cual se carga automaticamente el invocar el script (el archivo .config, debe tener el mismo nombre que el archivo del script)
 
 ## Funciones
 - chkPath();
@@ -26,17 +28,17 @@ This is a sample markdown file to help you write Markdown quickly :)
 
 ## Variables
 #### Generales
-- LIBRARY_VERSION
-- LIBRARY_FILE
-- LIBRARY_PATH
-- LIBRARY
-- SCRIPT_FILE
-- SCRIPT_PATH
-- SCRIPT_CFG_FILE
-- SCRIPT_TITLE
-- TEMP_PATH
-- DATE
-- HOST_NAME
+- LIBRARY_VERSION (string)
+- LIBRARY_FILE (string)
+- LIBRARY_PATH (string)
+- LIBRARY (string)
+- SCRIPT_FILE (string)
+- SCRIPT_PATH (string)
+- SCRIPT_CFG_FILE (string)
+- SCRIPT_TITLE (string)
+- TEMP_PATH (string)
+- DATE (string)
+- HOST_NAME (string)
 
 #### Tipograficas
 - ESC_CHAR (string)
