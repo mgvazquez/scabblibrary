@@ -5,65 +5,65 @@
 El archivo `template_script.tar.gz` contiene un template de script bash basado en *Scabblibrary*, junto con su correspondiente archivo de configuracion el cual se carga automaticamente el invocar el script (el archivo .config, debe tener el mismo nombre que el archivo del script). 
 
 ## Funciones
-- *chkPath();*<br/>
-- *chkProcess();*<br/>
-- *chkScriptIntegrity();*<br/>
-- *chkScriptVersion();*<br/>
-- *chkSsh();*<br/>
-- *chkSum();*<br/>
-- *debug();*<br/>
-- *doQuestionAndReadAnswer();*<br/>
-- *doQuestionAndReadSimpleAnswer();*<br/>
-- *getEnvironment();*<br/>
-- *getHour();*<br/>
-- *getSubstring();*<br/>
-- *gotConnected();*<br/>
-- *linexy();*<br/>
-- *log();*<br/>
-- *remplaceString();*<br/>
-- *rotateFile();*<br/>
-- *sendMail();*<br/>
-- *toLower();*<br/>
-- *toUpper();*<br/>
+- *chkPath();*<dd>Texto de Prueba</dd><br/>
+- *chkProcess();*<dd>Texto de Prueba</dd><br/>
+- *chkScriptIntegrity();*<dd>Texto de Prueba</dd><br/>
+- *chkScriptVersion();*<dd>Texto de Prueba</dd><br/>
+- *chkSsh();*<dd>Texto de Prueba</dd><br/>
+- *chkSum();*<dd>Texto de Prueba</dd><br/>
+- *debug();*<dd>Texto de Prueba</dd><br/>
+- *doQuestionAndReadAnswer();*<dd>Texto de Prueba</dd><br/>
+- *doQuestionAndReadSimpleAnswer();<dd>Texto de Prueba</dd><br/>
+- *getEnvironment();*<dd>Texto de Prueba</dd><br/>
+- *getHour();*<dd>Texto de Prueba</dd><br/>
+- *getSubstring();*<dd>Texto de Prueba</dd><br/>
+- *gotConnected();*<dd>Texto de Prueba</dd><br/>
+- *linexy();*<dd>Texto de Prueba</dd><br/>
+- *log();*<dd>Texto de Prueba</dd><br/>
+- *remplaceString();*<dd>Texto de Prueba</dd><br/>
+- *rotateFile();*<dd>Texto de Prueba</dd><br/>
+- *sendMail();*<dd>Texto de Prueba</dd><br/>
+- *toLower();*<dd>Texto de Prueba</dd><br/>
+- *toUpper();*<dd>Texto de Prueba</dd><br/>
 
 ## Variables
 #### Generales
-- *LIBRARY_VERSION (string)*<br/>Contiene la version actual de la Libreria
-- *LIBRARY_FILE (string)*<br/>
-- *LIBRARY_PATH (string)*<br/>
-- *LIBRARY (string)*<br/>
-- *SCRIPT_FILE (string)*<br/>
-- *SCRIPT_PATH (string)*<br/>
-- *SCRIPT_CFG_FILE (string)*<br/>
-- *SCRIPT_TITLE (string)*<br/>
-- *TEMP_PATH (string)*<br/>
-- *DATE (string)*<br/>
-- *HOST_NAME (string)*<br/>
+- *LIBRARY_VERSION (string)*<dd> Contiene la version actual de la Libreria </dd><br/>
+- *LIBRARY_FILE (string)*<dd>Texto de Prueba</dd><br/>
+- *LIBRARY_PATH (string)*<dd>Texto de Prueba</dd><br/>
+- *LIBRARY (string)*<dd>Texto de Prueba</dd><br/>
+- *SCRIPT_FILE (string)*<dd>Texto de Prueba</dd><br/>
+- *SCRIPT_PATH (string)*<dd>Texto de Prueba</dd><br/>
+- *SCRIPT_CFG_FILE (string)*<dd>Texto de Prueba</dd><br/>
+- *SCRIPT_TITLE (string)*<dd>Texto de Prueba</dd><br/>
+- *TEMP_PATH (string)*<dd>Texto de Prueba</dd><br/>
+- *DATE (string)*<dd>Texto de Prueba</dd><br/>
+- *HOST_NAME (string)*<dd>Texto de Prueba</dd><br/>
 
 #### Tipograficas
-- *ESC_CHAR (string)*<br/>
-- *FONT_TP (array - String)*<br/>
-- *FONT_FG (array - String)*<br/>
-- *FONT_BG (array - String)*<br/>
+- *ESC_CHAR (string)*<dd>Texto de Prueba</dd><br/>
+- *FONT_TP (array - String)*<dd>Texto de Prueba foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa </dd><br/>
+- *FONT_FG (array - String)*<dd>Texto de Prueba</dd><br/>
+- *FONT_BG (array - String)*<dd>Texto de Prueba</dd><br/>
 
 #### Conectividad
-- *CHKCONNECTION (boolean)*<br/> # Devuelve si se comprobo la conexion
-- *GOTCONNECTED (boolean)*<br/> # Devuelve el estado actual de la conexion
+- *CHKCONNECTION (boolean)*<dd>Texto de Prueba</dd><br/> # Devuelve si se comprobo la conexion
+- *GOTCONNECTED (boolean)*<dd>Texto de Prueba</dd><br/> # Devuelve el estado actual de la conexion
 
 #### Notificaciones (Mail)
-- *SEND_MAIL_NOTIFICATION (boolean)*<br/>Al setear los valores true/false en esta variable, se habilita o deshabilita la funion sendMail();
+- *SEND_MAIL_NOTIFICATION (boolean)*<dd>Texto de Prueba</dd><br/>Al setear los valores true/false en esta variable, se habilita o deshabilita la funion sendMail();
 
 #### Logging
-- *STDOUT_ENABLE (boolean)*<br/>
-- *DEBUG_ENABLE (boolean)*<br/>
-- *LOG_ENABLE (boolean)*<br/>
-- *LOG_PATH (string)*<br/>
-- *LOG_FILE (string)*<br/>
-- *LOG (string)*<br/>
+- *STDOUT_ENABLE (boolean)*<dd>Texto de Prueba</dd><br/>
+- *DEBUG_ENABLE (boolean)*<dd>Texto de Prueba</dd><br/>
+- *LOG_ENABLE (boolean)*<dd>Texto de Prueba</dd><br/>
+- *LOG_PATH (string)*<dd>Texto de Prueba</dd><br/>
+- *LOG_FILE (string)*<dd>Texto de Prueba</dd><br/>
+- *LOG (string)*<dd>Texto de Prueba</dd><br/>
 
 #### Otros
-- *VERSION_CHECK (boolean)*<br/>
-- *WGET_TRIES (int)*<br/>
-- *WGET_TIMEOUT (int)*<br/>
-- *WGET_OPTIONS (string)*<br/>
-- *WGET_DEBUG (sting)*<br/>
+- *VERSION_CHECK (boolean)*<dd>Texto de Prueba</dd><br/>
+- *WGET_TRIES (int)*<dd>Texto de Prueba</dd><br/>
+- *WGET_TIMEOUT (int)*<dd>Texto de Prueba</dd><br/>
+- *WGET_OPTIONS (string)*<dd>Texto de Prueba</dd><br/>
+- *WGET_DEBUG (sting)*<dd>Texto de Prueba</dd><br/>
