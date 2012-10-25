@@ -30,17 +30,44 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 #### Generales
 - *LIBRARY_VERSION (string)*
 
-	Contiene la version actual de la Libreria<br/>
+		Contiene la version actual de la Libreria
 
-- *LIBRARY_FILE (string)*<dd>Contiene el nombre del archivo de la libreria, 'scabblibrary.lib'</dd><br/>
-- *LIBRARY_PATH (string)*<dd>Path en donde vive la libreria. Por defecto es `/usr/lib`<br/>Puede setearse desde el archivo de configuracion del script</dd><br/>
-- *SCRIPT_FILE (string)*<dd>Nombre del Script que importa la Librería</dd><br/>
-- *SCRIPT_PATH (string)*<dd>Texto de Prueba</dd><br/>
-- *SCRIPT_CFG_FILE (string)*<dd>Texto de Prueba</dd><br/>
-- *SCRIPT_TITLE (string)*<dd>Texto de Prueba</dd><br/>
-- *TEMP_PATH (string)*<dd>Texto de Prueba</dd><br/>
-- *DATE (string)*<dd>Texto de Prueba</dd><br/>
-- *HOST_NAME (string)*<dd>Texto de Prueba</dd><br/>
+- *LIBRARY_FILE (string)*
+
+	Contiene el nombre del archivo de la libreria, 'scabblibrary.lib'
+
+- *LIBRARY_PATH (string)*
+
+	Path en donde vive la libreria. Por defecto es `/usr/lib`
+	Puede setearse desde el archivo de configuracion del script
+
+- *SCRIPT_FILE (string)*
+
+	Nombre del Script que importa la Librería
+
+- *SCRIPT_PATH (string)*
+
+	Texto de Prueba</dd><br/>
+
+- *SCRIPT_CFG_FILE (string)*
+
+	Texto de Prueba</dd><br/>
+
+- *SCRIPT_TITLE (string)*
+
+	Texto de Prueba</dd><br/>
+
+- *TEMP_PATH (string)*
+
+	Texto de Prueba</dd><br/>
+
+- *DATE (string)*
+
+	Texto de Prueba</dd><br/>
+
+- *HOST_NAME (string)*
+
+	Texto de Prueba</dd><br/>
 
 #### Tipograficas
 - *ESC_CHAR (string)*<dd>Texto de Prueba</dd><br/>
