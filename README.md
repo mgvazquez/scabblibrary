@@ -28,7 +28,10 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 ## Variables
 #### Generales
-- *LIBRARY_VERSION (string)*<dd>Contiene la version actual de la Libreria</dd><br/>
+- *LIBRARY_VERSION (string)*
+
+	Contiene la version actual de la Libreria<br/>
+
 - *LIBRARY_FILE (string)*<dd>Contiene el nombre del archivo de la libreria, 'scabblibrary.lib'</dd><br/>
 - *LIBRARY_PATH (string)*<dd>Path en donde vive la libreria. Por defecto es `/usr/lib`<br/>Puede setearse desde el archivo de configuracion del script</dd><br/>
 - *SCRIPT_FILE (string)*<dd>Nombre del Script que importa la Librería</dd><br/>
