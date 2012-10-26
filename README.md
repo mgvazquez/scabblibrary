@@ -123,7 +123,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 
 ## Funciones
-- <a id="chkPath"></a>*chkPath();*
+- <a id="chkPath">*chkPath();*</a>
 
 
 -----------------------------------------------------------------------------------------------
