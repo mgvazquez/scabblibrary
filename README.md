@@ -144,25 +144,25 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 ## Funciones
 - <a name="chkPath">*chkPath();*</a>
-- <a name="">*chkProcess();*</a>
-- <a name="">*chkScriptIntegrity();*</a>
-- <a name="">*chkScriptVersion();*</a>
-- <a name="">*chkSsh();*</a>
-- <a name="">*chkSum();*</a>
-- <a name="">*debug();*</a>
-- <a name="">*doQuestionAndReadAnswer();*</a>
-- <a name="">*doQuestionAndReadSimpleAnswer();*</a>
-- <a name="">*getEnvironment();*</a>
-- <a name="">*getHour();*</a>
-- <a name="">*getSubstring();*</a>
-- <a name="">*gotConnected();*</a>
-- <a name="">*linexy();*</a>
-- <a name="">*log();*</a>
-- <a name="">*remplaceString();*</a>
-- <a name="">*rotateFile();*</a>
-- <a name="">*sendMail();*</a>
-- <a name="">*toLower();*</a>
-- <a name="">*toUpper();*</a>
+- <a name="chkProcess">*chkProcess();*</a>
+- <a name="chkScriptIntegrity">*chkScriptIntegrity();*</a>
+- <a name="chkScriptVersion">*chkScriptVersion();*</a>
+- <a name="chkSsh">*chkSsh();*</a>
+- <a name="chkSum">*chkSum();*</a>
+- <a name="debug">*debug();*</a>
+- <a name="doQuestionAndReadAnswer">*doQuestionAndReadAnswer();*</a>
+- <a name="doQuestionAndReadSimpleAnswer">*doQuestionAndReadSimpleAnswer();*</a>
+- <a name="getEnvironment">*getEnvironment();*</a>
+- <a name="getHour">*getHour();*</a>
+- <a name="getSubstring">*getSubstring();*</a>
+- <a name="gotConnected">*gotConnected();*</a>
+- <a name="linexy">*linexy();*</a>
+- <a name="log">*log();*</a>
+- <a name="remplaceString">*remplaceString();*</a>
+- <a name="rotateFile">*rotateFile();*</a>
+- <a name="sendMail">*sendMail();*</a>
+- <a name="toLower">*toLower();*</a>
+- <a name="toUpper">*toUpper();*</a>
 
 -----------------------------------------------------------------------------------------------
 
