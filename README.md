@@ -145,6 +145,20 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 		Texto de Prueba
 
+#### Conectividad
+
+- *CHKCONNECTION (boolean)*
+
+		Texto de Prueba
+
+- *GOTCONNECTED (boolean)*
+
+		Texto de Prueba
+
+#### Notificaciones (Mail)
+- *SEND_MAIL_NOTIFICATION (boolean)*
+
+		Al setear los valores true/false en esta variable, se habilita o deshabilita la funion sendMail();
 
 #### Logging
 - *STDOUT_ENABLE (boolean)*
