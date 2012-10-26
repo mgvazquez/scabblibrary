@@ -6,13 +6,14 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 ## Indice
 - [Funciones][funciones]
-	- chkPath()
+	- [chkPath();][funciones.chkPath]
 
 
 ## Funciones
-- *chkPath();*
+- *<a id="chkPath">chkPath();</a>*
 
 
 -----------------------------------------------------------------------------------------------
 
 [funciones]: https://github.com/mgvazquez/scabblibrary#funciones "Funciones"
+[funciones.chkPath]: https://github.com/mgvazquez/scabblibrary#chkPath "chkPath Function"
