@@ -123,13 +123,13 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 
 ## Funciones
-- *<a id="chkPath">chkPath();</a>*
+- *chkPath();*
 
 
 -----------------------------------------------------------------------------------------------
 
 [funciones]: #funciones "Funciones"
-[funciones.chkPath]: https://github.com/mgvazquez/scabblibrary#chkPath "chkPath Function"
+[funciones.chkPath]: #chkPath "chkPath Function"
 
 
 <a name="funciones" class="anchor" href="#funciones">
