@@ -5,26 +5,85 @@
 El archivo `template_script.tar.gz` contiene un template de script bash basado en *Scabblibrary*, junto con su correspondiente archivo de configuracion el cual se carga automaticamente el invocar el script (el archivo .config, debe tener el mismo nombre que el archivo del script). 
 
 ## Funciones
-- *chkPath();*<dd>Texto de Prueba</dd><br/>
-- *chkProcess();*<dd>Texto de Prueba</dd><br/>
-- *chkScriptIntegrity();*<dd>Texto de Prueba</dd><br/>
-- *chkScriptVersion();*<dd>Texto de Prueba</dd><br/>
-- *chkSsh();*<dd>Texto de Prueba</dd><br/>
-- *chkSum();*<dd>Texto de Prueba</dd><br/>
-- *debug();*<dd>Texto de Prueba</dd><br/>
-- *doQuestionAndReadAnswer();*<dd>Texto de Prueba</dd><br/>
-- *doQuestionAndReadSimpleAnswer();<dd>Texto de Prueba</dd><br/>
-- *getEnvironment();*<dd>Texto de Prueba</dd><br/>
-- *getHour();*<dd>Texto de Prueba</dd><br/>
-- *getSubstring();*<dd>Texto de Prueba</dd><br/>
-- *gotConnected();*<dd>Texto de Prueba</dd><br/>
-- *linexy();*<dd>Texto de Prueba</dd><br/>
-- *log();*<dd>Texto de Prueba</dd><br/>
-- *remplaceString();*<dd>Texto de Prueba</dd><br/>
-- *rotateFile();*<dd>Texto de Prueba</dd><br/>
-- *sendMail();*<dd>Texto de Prueba</dd><br/>
-- *toLower();*<dd>Texto de Prueba</dd><br/>
-- *toUpper();*<dd>Texto de Prueba</dd><br/>
+- *chkPath();*
+		
+		Texto de Prueba</dd><br/>
+
+- *chkProcess();*
+
+Texto de Prueba</dd><br/>
+
+- *chkScriptIntegrity();*
+
+Texto de Prueba</dd><br/>
+
+- *chkScriptVersion();*
+
+Texto de Prueba</dd><br/>
+
+- *chkSsh();*
+
+Texto de Prueba</dd><br/>
+
+- *chkSum();*
+
+Texto de Prueba</dd><br/>
+
+- *debug();*
+
+Texto de Prueba</dd><br/>
+
+- *doQuestionAndReadAnswer();*
+
+Texto de Prueba</dd><br/>
+
+- *doQuestionAndReadSimpleAnswer();
+
+Texto de Prueba</dd><br/>
+
+- *getEnvironment();*
+
+Texto de Prueba</dd><br/>
+
+- *getHour();*
+
+Texto de Prueba</dd><br/>
+
+- *getSubstring();*
+
+Texto de Prueba</dd><br/>
+
+- *gotConnected();*
+
+Texto de Prueba</dd><br/>
+
+- *linexy();*
+
+Texto de Prueba</dd><br/>
+
+- *log();*
+
+Texto de Prueba</dd><br/>
+
+- *remplaceString();*
+
+Texto de Prueba</dd><br/>
+
+- *rotateFile();*
+
+Texto de Prueba</dd><br/>
+
+- *sendMail();*
+
+Texto de Prueba</dd><br/>
+
+- *toLower();*
+
+Texto de Prueba</dd><br/>
+
+- *toUpper();*
+
+Texto de Prueba</dd><br/>
 
 ## Variables
 #### Generales
@@ -34,40 +93,40 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 - *LIBRARY_FILE (string)*
 
-	Contiene el nombre del archivo de la libreria, 'scabblibrary.lib'
+		Contiene el nombre del archivo de la libreria, 'scabblibrary.lib'
 
 - *LIBRARY_PATH (string)*
 
-	Path en donde vive la libreria. Por defecto es `/usr/lib`
-	Puede setearse desde el archivo de configuracion del script
+		Path en donde vive la libreria. Por defecto es `/usr/lib`
+		Puede setearse desde el archivo de configuracion del script
 
 - *SCRIPT_FILE (string)*
 
-	Nombre del Script que importa la Librería
+		Nombre del Script que importa la Librería
 
 - *SCRIPT_PATH (string)*
 
-	Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *SCRIPT_CFG_FILE (string)*
 
-	Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *SCRIPT_TITLE (string)*
 
-	Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *TEMP_PATH (string)*
 
-	Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *DATE (string)*
 
-	Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *HOST_NAME (string)*
 
-	Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 #### Tipograficas
 - *ESC_CHAR (string)*<dd>Texto de Prueba</dd><br/>
@@ -98,5 +157,5 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 - *WGET_DEBUG (sting)*<dd>Texto de Prueba</dd><br/>
 
 <hr/>
-
+-----------------------------------------------------------------------------------------------
 sasa
