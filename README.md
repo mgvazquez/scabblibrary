@@ -6,84 +6,164 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 ## Funciones
 - *chkPath();*
-		
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *chkProcess();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *chkScriptIntegrity();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *chkScriptVersion();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *chkSsh();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *chkSum();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *debug();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *doQuestionAndReadAnswer();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *doQuestionAndReadSimpleAnswer();
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *getEnvironment();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *getHour();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *getSubstring();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *gotConnected();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *linexy();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *log();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *remplaceString();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *rotateFile();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *sendMail();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *toLower();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 - *toUpper();*
-
-		Texto de Prueba
+	- Uso:
+			
+				Uso
+	- Nota:
+			
+				Nota
 
 ## Variables
 #### Generales
