@@ -67,15 +67,20 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 - <a name="chkPath"></a>*chkPath();*
 		
 	Chequea que el path indicado exista(1), tenga permisos de escritura(2) y permisos de lectura(3).
-	> chkPath "/mnt/releases"
+	>chkPath "`path a verificar`"
 
 - <a name="chkProcess"></a>*chkProcess();*
 
 	Chequea que exista al menos una instancia del proceso indicado.
 	En caso de que exista al menos una devuelve 0, en caso contrario 1.
-	> chkProcess "chrome"
+	>chkProcess "`nombre del proceso`"
 
 - <a name="chkScriptIntegrity"></a>*chkScriptIntegrity();*
+
+	Realiza un checksum del script en el cual se esta instanciando (se puede especificar) contra un archivo '.sha' con el mismo nombre del script, para verificar que el mismo no haya sido alterado.<br/>
+	Al ejecutarse sin parametros, utiliza valida el escript el cual se instancio; y busca el archivo '.sha' en el path por defecto '/var/tmp'.<br/>
+	>chkScriptIntegrity "`archivo a validar`" "`path del .sha`"
+
 - <a name="chkScriptVersion"></a>*chkScriptVersion();*
 - <a name="chkSsh"></a>*chkSsh();*
 - <a name="chkSum"></a>*chkSum();*
