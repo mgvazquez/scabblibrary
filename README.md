@@ -163,34 +163,48 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 #### Logging
 - *STDOUT_ENABLE (boolean)*
 
-		Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *DEBUG_ENABLE (boolean)*
 
-		Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *LOG_ENABLE (boolean)*
 
-		Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *LOG_PATH (string)*
 
-		Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *LOG_FILE (string)*
 
-		Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *LOG (string)*
 
-		Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 #### Otros
-- *VERSION_CHECK (boolean)*<dd>Texto de Prueba</dd><br/>
-- *WGET_TRIES (int)*<dd>Texto de Prueba</dd><br/>
-- *WGET_TIMEOUT (int)*<dd>Texto de Prueba</dd><br/>
-- *WGET_OPTIONS (string)*<dd>Texto de Prueba</dd><br/>
-- *WGET_DEBUG (sting)*<dd>Texto de Prueba</dd><br/>
+- *VERSION_CHECK (boolean)*
+
+		Texto de Prueba
+
+- *WGET_TRIES (int)*
+
+		Texto de Prueba
+
+- *WGET_TIMEOUT (int)*
+
+		Texto de Prueba
+
+- *WGET_OPTIONS (string)*
+
+		Texto de Prueba
+
+- *WGET_DEBUG (sting)*
+
+		Texto de Prueba
 
 -----------------------------------------------------------------------------------------------
 
