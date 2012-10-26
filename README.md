@@ -144,24 +144,24 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 ## Funciones
 - <a name="chkPath"></a>*chkPath();*
 - <a name="chkProcess"></a>*chkProcess();*
-- <a name="chkScriptIntegrity">*chkScriptIntegrity();*</a>
-- <a name="chkScriptVersion">*chkScriptVersion();*</a>
-- <a name="chkSsh">*chkSsh();*</a>
-- <a name="chkSum">*chkSum();*</a>
-- <a name="debug">*debug();*</a>
-- <a name="doQuestionAndReadAnswer">*doQuestionAndReadAnswer();*</a>
-- <a name="doQuestionAndReadSimpleAnswer">*doQuestionAndReadSimpleAnswer();*</a>
-- <a name="getEnvironment">*getEnvironment();*</a>
-- <a name="getHour">*getHour();*</a>
-- <a name="getSubstring">*getSubstring();*</a>
-- <a name="gotConnected">*gotConnected();*</a>
-- <a name="linexy">*linexy();*</a>
-- <a name="log">*log();*</a>
-- <a name="remplaceString">*remplaceString();*</a>
-- <a name="rotateFile">*rotateFile();*</a>
-- <a name="sendMail">*sendMail();*</a>
-- <a name="toLower">*toLower();*</a>
-- <a name="toUpper">*toUpper();*</a>
+- <a name="chkScriptIntegrity"></a>*chkScriptIntegrity();*
+- <a name="chkScriptVersion"></a>*chkScriptVersion();*
+- <a name="chkSsh"></a>*chkSsh();*
+- <a name="chkSum"></a>*chkSum();*
+- <a name="debug"></a>*debug();*
+- <a name="doQuestionAndReadAnswer"></a>*doQuestionAndReadAnswer();*
+- <a name="doQuestionAndReadSimpleAnswer"></a>*doQuestionAndReadSimpleAnswer();*
+- <a name="getEnvironment"></a>*getEnvironment();*
+- <a name="getHour"></a>*getHour();*
+- <a name="getSubstring"></a>*getSubstring();*
+- <a name="gotConnected"></a>*gotConnected();*
+- <a name="linexy"></a>*linexy();*
+- <a name="log"></a>*log();*
+- <a name="remplaceString"></a>*remplaceString();*
+- <a name="rotateFile"></a>*rotateFile();*
+- <a name="sendMail"></a>*sendMail();*
+- <a name="toLower"></a>*toLower();*
+- <a name="toUpper"></a>*toUpper();*
 
 -----------------------------------------------------------------------------------------------
 
