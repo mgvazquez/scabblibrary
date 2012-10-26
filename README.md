@@ -141,10 +141,9 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 -----------------------------------------------------------------------------------------------
 
-
 ## Funciones
-- <a name="chkPath">*chkPath();*</a>
-- <a name="chkProcess">*chkProcess();*</a>
+- <a name="chkPath"></a>*chkPath();*
+- <a name="chkProcess"></a>*chkProcess();*
 - <a name="chkScriptIntegrity">*chkScriptIntegrity();*</a>
 - <a name="chkScriptVersion">*chkScriptVersion();*</a>
 - <a name="chkSsh">*chkSsh();*</a>
