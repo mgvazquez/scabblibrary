@@ -7,83 +7,83 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 ## Funciones
 - *chkPath();*
 		
-		Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *chkProcess();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *chkScriptIntegrity();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *chkScriptVersion();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *chkSsh();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *chkSum();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *debug();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *doQuestionAndReadAnswer();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *doQuestionAndReadSimpleAnswer();
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *getEnvironment();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *getHour();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *getSubstring();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *gotConnected();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *linexy();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *log();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *remplaceString();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *rotateFile();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *sendMail();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *toLower();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 - *toUpper();*
 
-Texto de Prueba</dd><br/>
+		Texto de Prueba
 
 ## Variables
 #### Generales
@@ -129,25 +129,47 @@ Texto de Prueba</dd><br/>
 		Texto de Prueba
 
 #### Tipograficas
-- *ESC_CHAR (string)*<dd>Texto de Prueba</dd><br/>
-- *FONT_TP (array - String)*<dd>Texto de Prueba foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa </dd><br/>
-- *FONT_FG (array - String)*<dd>Texto de Prueba</dd><br/>
-- *FONT_BG (array - String)*<dd>Texto de Prueba</dd><br/>
+- *ESC_CHAR (string)*
 
-#### Conectividad
-- *CHKCONNECTION (boolean)*<dd>Texto de Prueba</dd><br/> # Devuelve si se comprobo la conexion
-- *GOTCONNECTED (boolean)*<dd>Texto de Prueba</dd><br/> # Devuelve el estado actual de la conexion
+		Texto de Prueba
 
-#### Notificaciones (Mail)
-- *SEND_MAIL_NOTIFICATION (boolean)*<dd>Texto de Prueba</dd><br/>Al setear los valores true/false en esta variable, se habilita o deshabilita la funion sendMail();
+- *FONT_TP (array - String)*
+		
+		Texto de Prueba foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa foo faa
+
+- *FONT_FG (array - String)*
+
+		Texto de Prueba
+
+- *FONT_BG (array - String)*
+
+		Texto de Prueba
+
 
 #### Logging
-- *STDOUT_ENABLE (boolean)*<dd>Texto de Prueba</dd><br/>
-- *DEBUG_ENABLE (boolean)*<dd>Texto de Prueba</dd><br/>
-- *LOG_ENABLE (boolean)*<dd>Texto de Prueba</dd><br/>
-- *LOG_PATH (string)*<dd>Texto de Prueba</dd><br/>
-- *LOG_FILE (string)*<dd>Texto de Prueba</dd><br/>
-- *LOG (string)*<dd>Texto de Prueba</dd><br/>
+- *STDOUT_ENABLE (boolean)*
+
+		Texto de Prueba</dd><br/>
+
+- *DEBUG_ENABLE (boolean)*
+
+		Texto de Prueba</dd><br/>
+
+- *LOG_ENABLE (boolean)*
+
+		Texto de Prueba</dd><br/>
+
+- *LOG_PATH (string)*
+
+		Texto de Prueba</dd><br/>
+
+- *LOG_FILE (string)*
+
+		Texto de Prueba</dd><br/>
+
+- *LOG (string)*
+
+		Texto de Prueba</dd><br/>
 
 #### Otros
 - *VERSION_CHECK (boolean)*<dd>Texto de Prueba</dd><br/>
