@@ -5,8 +5,8 @@
 El archivo `template_script.tar.gz` contiene un template de script bash basado en *Scabblibrary*, junto con su correspondiente archivo de configuracion el cual se carga automaticamente el invocar el script (el archivo .config, debe tener el mismo nombre que el archivo del script). 
 
 ## Indice
-[Funciones][funciones]
-
+- [Funciones][funciones]
+	- chkPath()
 
 
 ## Funciones
