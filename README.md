@@ -156,6 +156,6 @@ Texto de Prueba</dd><br/>
 - *WGET_OPTIONS (string)*<dd>Texto de Prueba</dd><br/>
 - *WGET_DEBUG (sting)*<dd>Texto de Prueba</dd><br/>
 
-<hr/>
 -----------------------------------------------------------------------------------------------
+
 sasa
