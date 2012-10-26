@@ -84,6 +84,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 - <a name="sendMail"></a>*sendMail();*
 - <a name="toLower"></a>*toLower();*
 - <a name="toUpper"></a>*toUpper();*
+
 ## Variables
 #### Generales
 - <a name="library_version"></a>*LIBRARY_VERSION (string)*
@@ -96,22 +97,27 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 - <a name="temp_path"></a>*TEMP_PATH (string)*
 - <a name="date"></a>*DATE (string)*
 - <a name="host_name"></a>*HOST_NAME (string)*
+
 #### Tipograficas
 - <a name="esc_char"></a>*ESC_CHAR (string)*
 - <a name="font_tp"></a>*FONT_TP (array - String)*
 - <a name="font_fg"></a>*FONT_FG (array - String)*
 - <a name="font_bg"></a>*FONT_BG (array - String)*
+
 #### Conectividad
 - <a name="chkconnection"></a>*CHKCONNECTION (boolean)*
 - <a name="gotconnected"></a>*GOTCONNECTED (boolean)*
+
 #### Notificaciones (Mail)
 - <a name="send_mail_notification"></a>*SEND_MAIL_NOTIFICATION (boolean)*
+
 #### Logging
 - <a name="stdout_enable"></a>*STDOUT_ENABLE (boolean)*
 - <a name="debug_enable"></a>*DEBUG_ENABLE (boolean)*
 - <a name="log_enable"></a>*LOG_ENABLE (boolean)*
 - <a name="log_path"></a>*LOG_PATH (string)*
 - <a name="log_file"></a>*LOG_FILE (string)*
+
 #### Otros
 - <a name="version_check"></a>*VERSION_CHECK (boolean)*
 - <a name="wget_tries"></a>*WGET_TRIES (int)*
