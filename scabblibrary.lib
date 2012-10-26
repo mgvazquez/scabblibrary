@@ -57,6 +57,9 @@
 	# --- Verison ---
 	VERSION_CHECK=${VERSION_CHECK:-true}
 
+	# --- Integridad ---
+	INTEGRITY_CHECK=${INTEGRITY_CHECK:-true}
+
 	# --- Logging ---
 	STDOUT_ENABLE=${STDOUT_ENABLE:-true} # Habilita (true) / Deshabilita (false) el StdOut del Log
 	DEBUG_ENABLE=${DEBUG_ENABLE:-true} # Habilita (true) / Deshabilita (false) el Debug del Log
@@ -307,6 +310,7 @@
 	chkScriptIntegrity(){
 		# Uso: chkScriptIntegrity "<FILE_NAME>" "<TEMP_PATH>"
 		# Ej: chkScriptIntegrity "$LIBRARY_FILE" "/var/tmp"
+		if ! $INTEGRITY_CHECK; then return 0;	fi
 		if [[ $# -gt 0 ]]; then
 			local _fileScript=$(basename $1)
 			local _fileScriptPath=$(dirname $1)

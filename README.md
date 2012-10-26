@@ -56,6 +56,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 		- [LOG_FILE][var.logging.log_file]
 	- [Otros][var.other]
 		- [VERSION_CHECK][var.other.version_check]
+		- [INTEGRITY_CHECK][var.other.integrity_check]
 		- [WGET_TRIES][var.other.wget_tries]
 		- [WGET_TIMEOUT][var.other.wget_timeout]
 		- [WGET_OPTIONS][var.other.wget_options]
@@ -79,6 +80,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 	Realiza un checksum del script en el cual se esta instanciando (se puede especificar) contra un archivo '.sha' con el mismo nombre del script, para verificar que el mismo no haya sido alterado.<br/>
 	Al ejecutarse sin parametros, utiliza valida el escript el cual se instancio; y busca el archivo '.sha' en el path por defecto '/var/tmp'.<br/>
+	Puede ser deshabilitado seteando la variable [$INTEGRITY_CHECK][var.other.integrity_check] en `false`.
 	>chkScriptIntegrity "`archivo a validar`" "`path del .sha`"
 
 - <a name="chkScriptVersion"></a>*chkScriptVersion();*
@@ -134,6 +136,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 #### Otros
 - <a name="version_check"></a>*VERSION_CHECK (boolean)*
+- <a name="integrity_check"></a>*INTEGRITY_CHECK (boolean)*
 - <a name="wget_tries"></a>*WGET_TRIES (int)*
 - <a name="wget_timeout"></a>*WGET_TIMEOUT (int)*
 - <a name="wget_options"></a>*WGET_OPTIONS (string)*
@@ -192,6 +195,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 [var.logging.log_file]: #log_file "Log File Variable"
 [var.other]: #otros "Others Variables"
 [var.other.version_check]: #version_check "Version Control Variable"
+[var.other.integrity_check]: #integrity_check "Integrity Control Variable"
 [var.other.wget_tries]: #wget_tries "WGet tries Variable"
 [var.other.wget_timeout]: #wget_timeout "WGet Timeout Variable"
 [var.other.wget_options]: #wget_options "WGet extra Options Variable"
