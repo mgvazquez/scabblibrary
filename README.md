@@ -65,8 +65,9 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 
 ## Funciones
 - <a name="chkPath"></a>*chkPath();*
-		Chequea que el path indicado exista(1), tenga permisos de escritura(2) y permisos de lectura(3)
 		
+		Chequea que el path indicado exista(1), tenga permisos de escritura(2) y permisos de lectura(3)
+
 - <a name="chkProcess"></a>*chkProcess();*
 - <a name="chkScriptIntegrity"></a>*chkScriptIntegrity();*
 - <a name="chkScriptVersion"></a>*chkScriptVersion();*
