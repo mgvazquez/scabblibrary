@@ -14,156 +14,42 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 				Nota
 
 - *chkProcess();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *chkScriptIntegrity();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *chkScriptVersion();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *chkSsh();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *chkSum();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *debug();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *doQuestionAndReadAnswer();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *doQuestionAndReadSimpleAnswer();
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *getEnvironment();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *getHour();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *getSubstring();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *gotConnected();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *linexy();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *log();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *remplaceString();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *rotateFile();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *sendMail();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *toLower();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 - *toUpper();*
-	- Uso:
-			
-				Uso
-	- Nota:
-			
-				Nota
 
 ## Variables
 #### Generales
