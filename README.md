@@ -143,7 +143,7 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 - <a name="wget_debug"></a>*WGET_DEBUG (sting)*
 
 
-```php
+```shell
 	#--- Carga Librerias ---
 	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib/lsb}
 	if [[ -f $LIBRARY_PATH/scabblibrary.lib ]]; then
