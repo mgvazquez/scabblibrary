@@ -142,6 +142,18 @@ El archivo `template_script.tar.gz` contiene un template de script bash basado e
 - <a name="wget_options"></a>*WGET_OPTIONS (string)*
 - <a name="wget_debug"></a>*WGET_DEBUG (sting)*
 
+
+```php
+	#--- Carga Librerias ---
+	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib/lsb}
+	if [[ -f $LIBRARY_PATH/scabblibrary.lib ]]; then
+		. $LIBRARY_PATH/scabblibrary.lib
+	else
+		/usr/bin/clear && echo -e "ERROR: No se encontro la libreria 'scabblibrary.lib' (http://github.com/mgvazquez/scabblibrary) en '$LIBRARY_PATH'."
+		exit 1
+	fi
+```
+
 -----------------------------------------------------------------------------------------------
 
 [funciones]: #funciones "Funciones"
