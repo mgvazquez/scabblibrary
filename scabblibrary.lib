@@ -32,7 +32,7 @@
 
 	SCRIPT_FILE=$(basename $0) # Archivo del Script
 	SCRIPT_PATH=$(dirname $0) # Path del Script
-	SCRIPT_CFG_FILE="${SCRIPT_FILE%.*}.config" # Archivo de configuracion
+	SCRIPT_CFG_FILE=${SCRIPT_CFG_FILE:-${SCRIPT_FILE%.*}.config} # Archivo de configuracion
 	SCRIPT_TITLE=${SCRIPT_TITLE:-"Template"} # Titulo del Script
 	TEMP_PATH=${TEMP_PATH:-"/tmp"} # Path para archivos temporales
 	DATE=`date "+%Y.%m.%d"`
