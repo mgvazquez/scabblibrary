@@ -325,7 +325,7 @@
 			if gotConnected; then
 				/usr/bin/wget -P $_tmpPath -t $WGET_TRIES -T $WGET_TIMEOUT $WGET_DEBUG $WGET_OPTIONS https://raw.github.com/mgvazquez/${_fileScript%.*}/master/sha1/${_fileScript%.*}.sha
 				if [[ $? -gt 0 ]]; then
-					echo -e "- ERROR: Imposible descargar el archivo de firma" | log
+					echo -e "- ERROR: Imposible descargar el archivo de firma en $_tmpPath" | log
 					echo -e "(Intente descargarlo manualmente desde http://github.com/mgvazquez/${_fileScript%.*}/)" | log
 					exit 1
 				else
