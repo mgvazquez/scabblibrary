@@ -319,7 +319,7 @@
 		local _fileScript=${_fileScript:-$SCRIPT_FILE}
 		local _fileScriptPath=${_fileScriptPath:-$SCRIPT_PATH}
 		local _tmpPath=${_tmpPath:-"/var/tmp"}
-		echo -e "\nChequeando integridad de: $_fileScript" | log
+		echo -e "\nChequeando integridad de: $_fileScript" | debug
 		if [[ ! -f "$_tmpPath/${_fileScript%.*}.sha" ]]; then
 			echo -e "- No existe el archivo de firma '${_fileScript%.*}.sha', se intenta descargar." | log
 			if gotConnected; then
@@ -329,7 +329,7 @@
 					echo -e "(Intente descargarlo manualmente desde http://github.com/mgvazquez/${_fileScript%.*}/)" | log
 					exit 1
 				else
-					echo -e "- Archivo de firma descargado satisfactoriamente" | log
+					echo -e "- Archivo de firma descargado satisfactoriamente" | debug
 				fi
 			else
 				echo -e "- ERROR: Imposible descargar el archivo de firma" | log
@@ -342,7 +342,7 @@
 		local _file2=$(/usr/bin/sha1sum $_fileScriptPath/$_fileScript | awk -F ' ' '{print $1}')
 		echo -e "- Checksum del '$_fileScript': $_file2" | debug
 		if [[ "$_file1" == "$_file2" ]]; then
-			echo -e "- Integridad comprobada" | log && return 0
+			echo -e "- Integridad comprobada" | debug && return 0
 		 else
 		 	echo -e "- Falla de integridad" | log && exit 1
 		fi
