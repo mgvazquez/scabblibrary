@@ -168,7 +168,7 @@
 		# Ej: remplaceString "Hola" "Chau" "test.cfg"
 		echo -e "Renplazando '$2' en el archivo $3" | debug
 		local _beforeSed=$(/usr/bin/sha1sum $3 | awk -F ' ' '{print $1}')
-		sed -i "s/"$1"/"$2"/g" "$3"
+		sed -i "s/\""$1"\"/\""$2"\"/g" "$3"
 		local _afterSed=$(/usr/bin/sha1sum $3 | awk -F ' ' '{print $1}')
 		if [[ "$_beforeSed" == "$_afterSed" ]]; then
 			echo -e "- No hubo matcheos" | debug && return 1
