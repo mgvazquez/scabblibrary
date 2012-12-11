@@ -1,0 +1,21 @@
+Para enviar con MUTT
+
+
+SUBJECT='ZonaProp Invoicer-Ida-1-2-3'
+BODY='Se corrio la interfaz 1, 2 y 3 de ida en produccion. Se adjunta el log de la corrida.'
+ATTACHMENT=/usr/local/invoicer-zonaprop/invoicer-ida-1-2-3.log
+RECEIVER=fgambarrutta@dridco.com
+CC=aserra@dridco.com
+
+echo $BODY | mutt -s $SUBJECT -a $ATTACHMENT -c $CC $RECEIVER
+
+
+
+export EMAIL="indices@zonajobs.com" && echo "$ERROR_BODY" | mutt -s $ERROR_SUBJECT $MAIL_NOTIFICATION
+
+
+
+
+
+
+export EMAIL="indices@zonajobs.com" && echo -e "\nEsto es un test" | mutt -s "SARASA" "mgarcia@dridco.com"
