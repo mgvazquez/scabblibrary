@@ -1,6 +1,6 @@
 #!/bin/echo Warning: this library should be sourced!
 #
-# 	Function Library (c)2012 - Version 1.2
+# 	Function Library (c)2012 - Version 1.2.1
 #
 #	This program is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 # 
 
 ############## VARIABLES / CONSTANTES ##############
-	LIBRARY_VERSION="1.2"
+	LIBRARY_VERSION="1.2.1"
 	LIBRARY_FILE="scabblibrary.lib"
 	LIBRARY_PATH=${LIBRARY_PATH:-/usr/lib}
 	LIBRARY=${LIBRARY:-$LIBRARY_PATH/$LIBRARY_FILE}
@@ -88,12 +88,8 @@
 		# Ej: tar --directory=$1 --append --file=$PATH_TMP/$2 $3.war | log
 		while read data
 		do
-			if $STDOUT_ENABLE; then
-				echo -e "$data"; # Imprime en Pantalla
-			fi
-			if $LOG_ENABLE; then
-				echo -e "[$(date "+%Y.%m.%d") - $(date "+%H:%M:%S")] $data" >> $LOG; # Imprime en el archivo de Log
-			fi
+			[ "$STDOUT_ENABLE" = true ] && echo -e "$data"
+			[ "$LOG_ENABLE" = true ] && echo -e "[$(date "+%Y.%m.%d") - $(date "+%H:%M:%S")] $data" >> $LOG
 		done
 	}
 
@@ -104,9 +100,7 @@
 		# Ej: tar --directory=$1 --append --file=$PATH_TMP/$2 $3.war | debug
 		while read data
 		do
-			if $DEBUG_ENABLE; then
-				echo -e "$data" | log
-			fi
+			[ "$DEBUG_ENABLE" = true ] && echo -e "$data" | log
 		done		
 	}
 
@@ -120,12 +114,12 @@
 
 	# Convirte un String de Minúscula a Mayúscula
 	toUpper(){
-		echo $1 | tr  "[:lower:]" "[:upper:]"
+		echo $1 | tr "[:lower:]" "[:upper:]"
 	}
 
 	# Convirte un String de Mayúscula a Minúscula
 	toLower(){
-		echo $1 | tr  "[:upper:]" "[:lower:]"
+		echo $1 | tr "[:upper:]" "[:lower:]"
 	}
 
 	# Hace una pregunta y guarda la respuesta
@@ -263,8 +257,8 @@
 		# Uso / linexy "<CARACTER>" "<X>" "<Y>"
 		# Ej: linexy "=" "0" "0"
 		local _columnas=$(tput cols) # Obtiene la cantidad de columnas del terminal
-		if [ $2 == null ]; then echo 1; fi
-		if [ $3 == mull ]; then echo 2; fi
+		[ -z $2 ] && echo -e "Falta definir 'X'"
+		[ -z $3 ] && echo -e "Falta definir 'Y'"
 		/usr/bin/tput cup $3 $2
 		printf "%*s" $_columnas | tr " " "$1" # Reemplaza los espacios por lo que se ponga en $1
 	}
@@ -277,7 +271,7 @@
 		# ==============================================
 		# >>>           Esto es un titulo           <<<
 		# ==============================================
-		if [ "$2" == "clear" ]; then clear; fi # Limpia la pantalla
+		[ "$2" == "clear" ] && clear # Limpia la pantalla
 		local _columnas=$(tput cols) # Obtiene la cantidad de columnas del terminal
 		linexy "=" "0" "0"
 		printf "%-*s%*s%*s\n" "3" ">>>" "$(((($_columnas+${#1})/2)-3))" "$1" "$(($_columnas-(($_columnas+${#1})/2)))" "<<<"
@@ -311,7 +305,7 @@
 	chkScriptIntegrity(){
 		# Uso: chkScriptIntegrity "<FILE_NAME>" "<TEMP_PATH>"
 		# Ej: chkScriptIntegrity "$LIBRARY_FILE" "/var/tmp"
-		if ! $INTEGRITY_CHECK; then return 0;	fi
+		[ $INTEGRITY_CHECK != true ] && return 0
 		if [[ $# -gt 0 ]]; then
 			local _fileScript=$(basename $1)
 			local _fileScriptPath=$(dirname $1)
@@ -383,7 +377,7 @@
 		# Uso: chkScriptVersion "<FILE_NAME>" "<FILE_VERSION>"
 		# Ej: chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION"
 		# Nota: Debe estar seteada la variable <VERSION>
-		if ! $VERSION_CHECK; then return 0;	fi
+		[ $VERSION_CHECK != true ] && return 0
 		if [[ $# -gt 0 ]]; then local _fileScript=$1; local _localVersion=$2; fi
 		local _fileScript=${_fileScript:-$SCRIPT_FILE}
 		echo -e "\nChequeando version de: $_fileScript" | log
@@ -432,7 +426,7 @@
 
 
 ####################### MAIN #######################
-	clear
+	clear;
 	chkScriptIntegrity "$LIBRARY";
 	chkScriptVersion "$LIBRARY_FILE" "$LIBRARY_VERSION";
 ####################################################
